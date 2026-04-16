@@ -36,14 +36,14 @@ async function getTokenURI(tokenId) {
 }
 
 async function getBpegCount(wallet) {
-  // bpegCount(address) => 0x3a8a5d35
-  const res = await ethCall("0x3a8a5d35", encodeAddress(wallet));
+  // bpegCount(address) => 0x8e91dc0b
+  const res = await ethCall("0x8e91dc0b", encodeAddress(wallet));
   return parseInt(res, 16);
 }
 
 async function getBpegAt(wallet, idx) {
-  // bpegAt(address,uint256) => 0x8a6d6d4e
-  const res = await ethCall("0x8a6d6d4e", encodeAddress(wallet), encodeUint(idx));
+  // bpegAt(address,uint256) => 0xc6bc5cc6
+  const res = await ethCall("0xc6bc5cc6", encodeAddress(wallet), encodeUint(idx));
   const hex = res.slice(2);
   return {
     id:   parseInt(hex.slice(0, 64), 16),
@@ -52,9 +52,9 @@ async function getBpegAt(wallet, idx) {
 }
 
 async function getTotalBpegs() {
-  // totalBpegs() => 0x2b5b2a13
+  // totalBpegs() => 0x6d50ea77
   try {
-    const res = await ethCall("0x2b5b2a13");
+    const res = await ethCall("0x6d50ea77");
     return parseInt(res, 16);
   } catch { return null; }
 }
