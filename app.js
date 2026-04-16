@@ -1,5 +1,5 @@
 // ── Config ────────────────────────────────────────────────────────────────────
-const CONTRACT = "0xb3D9F22a9CfE39bcE0b537e90BDf057aC3696379";
+const CONTRACT = "0x2Ac98DD5395D12300d58e7941f2b3ebB6Dd69F76";
 const RPC      = "https://mainnet.base.org";
 const SCAN     = "https://basescan.org";
 
