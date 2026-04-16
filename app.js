@@ -1,7 +1,7 @@
 // ── Config ────────────────────────────────────────────────────────────────────
-const CONTRACT = "0x4b5293b4F66006010E6F203bA8d6aF21552D47AF";
-const RPC      = "https://sepolia.base.org";
-const SCAN     = "https://sepolia.basescan.org";
+const CONTRACT = "0xb3D9F22a9CfE39bcE0b537e90BDf057aC3696379";
+const RPC      = "https://mainnet.base.org";
+const SCAN     = "https://basescan.org";
 
 // ── RPC helper ────────────────────────────────────────────────────────────────
 async function rpcCall(method, params) {
