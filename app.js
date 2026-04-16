@@ -1,5 +1,5 @@
 // ── Config ────────────────────────────────────────────────────────────────────
-const CONTRACT = "0xDfa9775F5D4f2848da24A19CB648fb88B30fba9D";
+const CONTRACT = "0x4b5293b4F66006010E6F203bA8d6aF21552D47AF";
 const RPC      = "https://sepolia.base.org";
 const SCAN     = "https://sepolia.basescan.org";
 
