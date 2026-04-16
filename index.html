@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>bPEG — Pixel Art Blocks on Base</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230052ff'/><rect x='20' y='20' width='24' height='24' fill='%234488ff'/></svg>"/>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <div class="logo-block"></div>
+        <span>bPEG</span>
+      </div>
+      <div class="nav-links">
+        <a href="#gallery">Gallery</a>
+        <a href="#lookup">My NFTs</a>
+        <a href="https://sepolia.basescan.org/address/0x4F3c803bbF62f46c76bf8f4aFf107393c007813a" target="_blank">BaseScan ↗</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-blocks">
+        <div class="hero-block b1"></div>
+        <div class="hero-block b2"></div>
+        <div class="hero-block b3"></div>
+        <div class="hero-block b4"></div>
+      </div>
+      <h1 class="hero-title">Pixel art blocks<br/>born on Base</h1>
+      <p class="hero-sub">10,000 unique blocks — each one a different color, ornament and rarity. 100% on-chain SVG. No IPFS. No servers.</p>
+      <div class="hero-actions">
+        <a href="#lookup" class="btn btn-primary">View my NFTs</a>
+        <a href="#gallery" class="btn btn-secondary">Browse gallery</a>
+      </div>
+      <div class="hero-stats" id="hero-stats">
+        <div class="stat"><span class="stat-val" id="stat-supply">10,000</span><span class="stat-label">Total supply</span></div>
+        <div class="stat"><span class="stat-val" id="stat-minted">—</span><span class="stat-label">Minted</span></div>
+        <div class="stat"><span class="stat-val">Base</span><span class="stat-label">Network</span></div>
+        <div class="stat"><span class="stat-val">100%</span><span class="stat-label">On-chain</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOOKUP -->
+  <section class="section" id="lookup">
+    <div class="container">
+      <h2 class="section-title">Find your bPEGs</h2>
+      <p class="section-sub">Enter your wallet address to see all your NFTs, or look up a specific token ID.</p>
+
+      <div class="lookup-card">
+        <div class="lookup-row">
+          <div class="field">
+            <label>Wallet address</label>
+            <input type="text" id="wallet-input" placeholder="0x..."/>
+          </div>
+          <button class="btn btn-primary" onclick="loadWallet()">Load NFTs</button>
+        </div>
+        <div class="divider"><span>or</span></div>
+        <div class="lookup-row">
+          <div class="field">
+            <label>Token ID</label>
+            <input type="number" id="token-id" placeholder="1" min="1"/>
+          </div>
+          <button class="btn btn-secondary" onclick="loadSingle()">View token</button>
+        </div>
+      </div>
+
+      <div id="lookup-status" class="status-msg" style="display:none;"></div>
+
+      <div class="nft-grid" id="lookup-grid"></div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="section section-alt" id="gallery">
+    <div class="container">
+      <h2 class="section-title">Gallery</h2>
+      <p class="section-sub">Browse all minted bPEGs. Each block is unique — generated from a random seed at mint.</p>
+
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all" onclick="setFilter('all', this)">All</button>
+        <button class="filter-btn" data-filter="Common" onclick="setFilter('Common', this)">Common</button>
+        <button class="filter-btn" data-filter="Uncommon" onclick="setFilter('Uncommon', this)">Uncommon</button>
+        <button class="filter-btn" data-filter="Rare" onclick="setFilter('Rare', this)">Rare</button>
+        <button class="filter-btn" data-filter="Ultra Rare" onclick="setFilter('Ultra Rare', this)">Ultra Rare</button>
+      </div>
+
+      <div id="gallery-status" class="status-msg">
+        <div class="loader"></div>
+        Loading gallery...
+      </div>
+      <div class="nft-grid" id="gallery-grid"></div>
+      <div style="text-align:center; margin-top:24px;">
+        <button class="btn btn-secondary" id="load-more-btn" onclick="loadMore()" style="display:none;">Load more</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="container">
+      <h2 class="section-title">How it works</h2>
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="about-icon" style="background:#e6f1fb; color:#0052ff;">◈</div>
+          <h3>ERC-20 + NFT hybrid</h3>
+          <p>Each whole bPEG token automatically carries a unique pixel art NFT. Buy 1 bPEG → get 1 NFT. Sell → NFT burns. Same mechanic as uPEG on Ethereum.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon" style="background:#eaf3de; color:#3b6d11;">⬡</div>
+          <h3>100% on-chain SVG</h3>
+          <p>Every image is generated and stored directly on Base. No IPFS, no external servers. As long as Base exists, your bPEG exists.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon" style="background:#faeeda; color:#854f0b;">★</div>
+          <h3>4 rarity levels</h3>
+          <p>Common (60%), Uncommon (25%), Rare (12%) and Ultra Rare (3%). Each level unlocks more ornaments, accessories and visual effects.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon" style="background:#eeedfe; color:#534ab7;">⬛</div>
+          <h3>Pixel art blocks</h3>
+          <p>Each bPEG is an isometric pixel art block — a tribute to Base and the blockchain itself. 8 colors, 5 ornaments, 5 accessories, 4 eye types.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RARITY TABLE -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Trait system</h2>
+      <div class="rarity-grid">
+        <div class="rarity-card">
+          <div class="rarity-header common">Common <span>60%</span></div>
+          <ul><li>8 block colors</li><li>No ornament</li><li>No accessory</li><li>Float animation</li></ul>
+        </div>
+        <div class="rarity-card">
+          <div class="rarity-header uncommon">Uncommon <span>25%</span></div>
+          <ul><li>All colors</li><li>1 ornament</li><li>Possible accessory</li><li>Float animation</li></ul>
+        </div>
+        <div class="rarity-card">
+          <div class="rarity-header rare">Rare <span>12%</span></div>
+          <ul><li>All colors</li><li>1 ornament</li><li>1 accessory</li><li>Eye effect</li></ul>
+        </div>
+        <div class="rarity-card">
+          <div class="rarity-header ultra">Ultra Rare <span>3%</span></div>
+          <ul><li>All colors</li><li>All ornaments</li><li>All accessories</li><li>Sparkles + eyes</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <div class="logo-block"></div>
+          <span>bPEG</span>
+        </div>
+        <div class="footer-links">
+          <a href="https://sepolia.basescan.org/address/0x4F3c803bbF62f46c76bf8f4aFf107393c007813a" target="_blank">Contract ↗</a>
+          <a href="https://base.org" target="_blank">Base ↗</a>
+        </div>
+        <p class="footer-copy">Deployed on Base Sepolia. 10,000 pixel art blocks.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modal" onclick="closeModal(event)">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <img class="modal-img" id="modal-img" src="" alt=""/>
+      <div class="modal-body">
+        <h2 id="modal-name"></h2>
+        <div class="modal-traits" id="modal-traits"></div>
+        <div class="modal-actions">
+          <a id="modal-scan" href="#" target="_blank" class="btn btn-primary" style="text-decoration:none; text-align:center;">View on BaseScan ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
